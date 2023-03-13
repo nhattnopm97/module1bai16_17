@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ứng dụng quản lý sản phẩm</title>
+</head>
+
+<body>
+    <h2>Thêm sản phẩm</h2>
+    <input id="list" type="text" placeholder="product">
+    <button onclick="them()">Thêm</button>
+    <h2>display all product</h2>
+    <table border="1px" id="table">
+
+    </table>
+    <script>
+        let danhSach = [];
+        function them() {
+            let valueInput = document.getElementById('list').value;
+            danhSach.push(valueInput);
+            themVaoMang();
+        }
+        function themVaoMang() {
+            let kQ = "";
+            for (i = 0; i < danhSach.length; i++) {
+                kQ +=
+                    `
+                <tr>
+                    <td>
+                        ${danhSach[i]}
+                    </td>
+                    <td>
+                        <button onclick=editDanhSach(${i})>edit</button>
+                    </td>
+                    <td>
+                        <button onclick=xoaDanhSach(${i})>delete</button>
+                    </td>
+                </tr>
+                `;
+            }
+            document.getElementById("table").innerHTML = kQ;
+            document.getElementById("list").value="";
+        }
+        function xoaDanhSach(id) {
+            danhSach.splice(id, 1);
+            themVaoMang();
+        }
+        function editDanhSach(id) {
+            //document.getElementById("list").value=danhSach[id];
+            let doiGiaTriDanhSach = prompt(`Nhập thay đổi cho sản phẩm ${danhSach[id]}`);
+            danhSach.splice(id,1,doiGiaTriDanhSach);
+            themVaoMang();
+            document.getElementById("list").value="";
+        }
+
+    </script>
+</body>
+
+</html>
